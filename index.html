@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Aniversario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        #mensajeContainer {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 80%;
+            margin: 0 auto;
+            position: relative;
+            background-image: url('https://raw.githubusercontent.com/tu-usuario/repositorio/main/boda_A%26J.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        #mensajeResultado {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 80%;
+            max-width: 300px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenida Alejandra!</h1>
+    <label for="fechaBoda">Ingresa la fecha de tu boda:</label><br>
+    <input type="date" id="fechaBoda" required><br>
+    <button onclick="verificarFechaBoda()">Verificar</button><br>
+    <div id="mensajeContainer">
+        <p id="mensajeResultado"></p>
+    </div>
+
+    <script>
+        function verificarFechaBoda() {
+            var inputFecha = document.getElementById("fechaBoda").value;
+            var fechaBoda = new Date(inputFecha);
+            var fechaHoy = new Date();
+
+            // Calcular años transcurridos desde la fecha de la boda hasta hoy
+            var aniosTranscurridos = fechaHoy.getFullYear() - fechaBoda.getFullYear();
+
+            // Ajustar el número de años si todavía no ha pasado el aniversario de este año
+            if (fechaHoy < new Date(fechaHoy.getFullYear(), fechaBoda.getMonth(), fechaBoda.getDate())) {
+                aniosTranscurridos--;
+            }
+
+            if (fechaBoda.toISOString().slice(0,10) === '2019-04-12') {
+                var mensaje = "Este es tu aniversario " + aniosTranscurridos + " y Jonathan te ama más cada año que pasa. ¡FELIZ ANIVERSARIO! 🎉";
+                document.getElementById("mensajeResultado").textContent = mensaje;
+            } else {
+                var mensaje = "Oops, ya no te acuerdas, ¡chale!";
+                document.getElementById("mensajeResultado").textContent = mensaje;
+            }
+        }
+    </script>
+</body>
+</html>
